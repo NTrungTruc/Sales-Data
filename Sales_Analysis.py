@@ -4,10 +4,10 @@ import plotly.graph_objs as go
 import pandas as pd
 
 
-sales = pd.read_csv('Sales-Data.csv')
+sales = pd.read_csv('sales.csv')
 sales['Order Date'] = pd.to_datetime(sales['Order Date'], dayfirst= True)
 sales['Year'] = sales['Order Date'].dt.year
-sales['Month'] = sales['Order Date'].dt.month_name()
+sales['Month'] = sales['Order Date'].dt.month
 app = Dash(__name__, meta_tags=[{'name': 'viewport', 'content': 'width=device-width'}])
 server = app.server
 app.layout = html.Div([
@@ -365,7 +365,7 @@ def update_graph(select_years, radio_items):
                 mode='markers+lines+text',
                 line=dict(width=3, color = 'orange'),
                 marker=dict(color='#19AAE1', size=10, symbol='circle',
-                            line=dict(color='#19AAE1', width=2)),
+                            line=dict(color='#19AAE1', width=3)),
                 hoverinfo='text',
                 hovertext=
                 '<b>Year</b>: ' + sales7['Year'].astype(str) + '<br>' +
@@ -404,6 +404,7 @@ def update_graph(select_years, radio_items):
                        linecolor='orange',
                        linewidth=1,
                        ticks='outside',
+                       dtick=1,
                        tickfont=dict(
                            family='Aerial',
                            color='orange',
@@ -722,6 +723,7 @@ def update_graph(select_years, radio_items):
                            linecolor='orange',
                            linewidth=1,
                            ticks='outside',
+                           dtick='1',
                            tickfont=dict(
                                family='Aerial',
                                color='orange',
